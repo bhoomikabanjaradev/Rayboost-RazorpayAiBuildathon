@@ -1,24 +1,22 @@
-#  RAYBOOST — AI Growth & Agentic Commerce
+<div align="center">
 
-> **Turn merchants into AI-native businesses.**
+#  RAYBOOST AI 
 
-RAYBOOST is an AI-powered merchant growth and agentic commerce platform built for the **Razorpay AI Buildathon 2026 — Track 01: AI Growth & Agentic Commerce**.
+**The platform connects AI-driven product discovery, personalization, merchant growth, campaign execution, purchase intelligence and Razorpay-powered test checkout into one controlled commerce loop.**
+
+*<i>Built For Razorpay AI Buildathon 2026 — Track 01<i>*
+</div>
+
+---
 
 RAYBOOST tackles both sides of the problem:
+> Grow the merchant's revenue, and make them sellable to AI buyers.
 * **Grow the merchant's revenue** through AI-driven opportunities and campaign orchestration.
 * **Make the merchant sellable to AI buyers** through an agent-readable commerce gateway and MCP integration.
 
-The platform connects AI-driven product discovery, personalization, merchant growth, campaign execution, purchase intelligence and Razorpay-powered test checkout into one controlled commerce loop.
----
-
-## 🎯 Built For
-
-**Razorpay AI Buildathon 2026 — Track 01**
-
-> Grow the merchant's revenue, and make them sellable to AI buyers.
 
 The project focuses on two connected capabilities:
-
+<div align="center">
 ### Merchant Growth
 
 ```text
@@ -54,10 +52,11 @@ Buyer Confirmation
         ↓
 Razorpay Test Checkout
 ```
-
 ---
+</div>
 
-# 💡 The Problem
+
+## 📉 Business Problem
 
 Traditional merchants are built for human-operated commerce:
 
@@ -86,7 +85,7 @@ RAYBOOST connects these two worlds.
 
 ---
 
-# 🧠 What RAYBOOST Does
+#  What RAYBOOST Does 📈
 
 RAYBOOST has two major sides.
 
