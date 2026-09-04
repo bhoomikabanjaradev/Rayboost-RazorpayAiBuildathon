@@ -17,6 +17,7 @@ RAYBOOST tackles both sides of the problem:
 
 The project focuses on two connected capabilities:
 <div align="center">
+    
 ### Merchant Growth
 
 ```text
