@@ -125,7 +125,7 @@ Catalogue / Cart / Purchase
   ↓
 Razorpay Checkout
 ```
-
+We built an AI-native commerce layer that makes a merchant discoverable and transactable by external AI agents, while simultaneously using AI to grow the merchant's revenue — with deterministic financial guardrails around every money action.
 ---
 
 # 🏗️ System Architecture
