@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "rayboost": {
+      "command": "D:\\razboost-agent\\razboost-agent\\.venv\\Scripts\\python.exe",
+      "args": [
+        "D:\\razboost-agent\\razboost-agent\\mcp_adapter\\server.py"
+      ],
+      "env": {
+        "RAYBOOST_BASE_URL": "http://127.0.0.1:8000",
+        "RAYBOOST_AGENT_ID": "claude-desktop",
+        "RAYBOOST_BUYER_ID": "claude-demo-buyer",
+        "RAYBOOST_SESSION_ID": "claude-local-session"
+      }
+    }
+  }
+}
