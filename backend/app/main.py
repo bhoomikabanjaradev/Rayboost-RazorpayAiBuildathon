@@ -16,6 +16,7 @@ from .buyer_intelligence import build_buyer_profile, build_personalized_plan, pe
 from .checkout_agent import cart_fingerprint, build_purchase_summary, validate_confirmed_intent
 from .agent_control import build_control_center
 from .commerce_gateway import (capability_manifest, search_products as gateway_search_products, product_detail as gateway_product_detail, related_products as gateway_related_products, new_agent_cart, cart_snapshot_gateway, add_cart_item as gateway_add_cart_item, gateway_recommendations, purchase_intent_view, order_status as gateway_order_status, gateway_safety_summary)
+from .learning_agent import (learning_overview, list_experiments, get_experiment, create_experiment, start_experiment, record_exposure, record_conversion, evaluate_experiment, promote_winner, learned_strategies, learning_signal_for_opportunity)
 
 # Keep existing revenue logic in this module so the original UI remains compatible.
 def revenue_opportunities():
@@ -88,7 +89,8 @@ def build_growth_opportunities():
             for rid in p.get('frequently_bought_with',[]):
                 q=catalog.get(rid)
                 if q:
-                    out.append({"id":f"catalog-{p['id']}-{q['id']}","type":"catalog_cross_sell","title":f"{p['name']} → {q['name']}","products":[p['id'],q['id']],"potential_monthly_revenue":round(float(q['price'])*2,2),"suggested_discount":5,"reason":f"Catalogue marks {q['name']} as frequently bought with {p['name']}; this is a test-store opportunity, not a historical sales claim.","metrics":{"source_orders":0,"attached_orders":0,"attachment_rate":0,"target_attachment_rate":10,"estimated_monthly_revenue":round(float(q['price'])*2,2)},"recommendation":{"primary_product":p['name'],"secondary_product":q['name'],"suggested_discount_percent":5}})
+                    fallback_id=f"catalog-{p['id']}-{q['id']}"
+                    out.append({"id":fallback_id,"type":"catalog_cross_sell","title":f"{p['name']} → {q['name']}","products":[p['id'],q['id']],"potential_monthly_revenue":round(float(q['price'])*2,2),"suggested_discount":5,"reason":f"Catalogue marks {q['name']} as frequently bought with {p['name']}; this is a test-store opportunity, not a historical sales claim.","metrics":{"source_orders":0,"attached_orders":0,"attachment_rate":0,"target_attachment_rate":10,"estimated_monthly_revenue":round(float(q['price'])*2,2)},"recommendation":{"primary_product":p['name'],"secondary_product":q['name'],"suggested_discount_percent":5},"learning_signal":learning_signal_for_opportunity({"id":fallback_id,"title":f"{p['name']} → {q['name']}","products":[p['id'],q['id']]})})
                     if len(out)>=5: return out
     return out
 
@@ -147,6 +149,34 @@ class PurchaseIntentIn(BaseModel):
 class PurchaseConfirmIn(BaseModel):
     intent_id: int
 
+class ExperimentVariantIn(BaseModel):
+    id: str
+    name: str
+    discount_percent: int = Field(default=0, ge=0, le=10)
+    message: str = ''
+
+class ExperimentCreateIn(BaseModel):
+    name: str
+    hypothesis: str
+    variants: list[ExperimentVariantIn]
+    opportunity_id: str | None = None
+    campaign_id: int | None = None
+
+class ExposureIn(BaseModel):
+    variant_id: str
+    buyer_id: str | None = None
+    agent_id: str = 'manual'
+    session_id: str | None = None
+    source: str = 'manual'
+
+class ConversionIn(BaseModel):
+    variant_id: str
+    buyer_id: str | None = None
+    revenue: float = Field(default=0, ge=0)
+    internal_order_id: str | None = None
+    source: str = 'manual'
+
+
 @app.get('/api/health')
 def health(): return {'ok':True,'razorpay_configured':configured(),'ai_configured':root_agent is not None}
 
@@ -164,6 +194,59 @@ def control_center():
     data=build_control_center()
     audit('control_center','control.center_view','Built unified agent decision and revenue intelligence view',status='SUCCESS')
     return data
+
+@app.get('/api/learning/overview')
+def learning_overview_api():
+    data=learning_overview()
+    audit('learning_agent','learning.overview','Built the experimentation and learning view',status='SUCCESS',meta=data.get('summary',{}))
+    return data
+
+@app.get('/api/learning/experiments')
+def learning_experiments():
+    return {'experiments':list_experiments()}
+
+@app.post('/api/learning/experiments')
+def learning_create(body: ExperimentCreateIn):
+    try:
+        exp=create_experiment(body.name,body.hypothesis,[v.model_dump() for v in body.variants],body.opportunity_id,body.campaign_id)
+        return {'ok':True,'experiment':exp}
+    except ValueError as e:
+        raise HTTPException(400,str(e))
+
+@app.get('/api/learning/experiments/{experiment_id}')
+def learning_get(experiment_id: str):
+    exp=get_experiment(experiment_id)
+    if not exp: raise HTTPException(404,'Experiment not found')
+    return {'ok':True,'experiment':exp}
+
+@app.post('/api/learning/experiments/{experiment_id}/start')
+def learning_start(experiment_id: str):
+    try: return {'ok':True,'experiment':start_experiment(experiment_id)}
+    except ValueError as e: raise HTTPException(400,str(e))
+
+@app.post('/api/learning/experiments/{experiment_id}/exposure')
+def learning_exposure(experiment_id: str, body: ExposureIn):
+    try: return {'ok':True,'experiment':record_exposure(experiment_id,body.variant_id,body.buyer_id,body.agent_id,body.session_id,body.source)}
+    except ValueError as e: raise HTTPException(400,str(e))
+
+@app.post('/api/learning/experiments/{experiment_id}/conversion')
+def learning_conversion(experiment_id: str, body: ConversionIn):
+    try: return {'ok':True,'experiment':record_conversion(experiment_id,body.variant_id,body.buyer_id,body.revenue,body.internal_order_id,body.source)}
+    except ValueError as e: raise HTTPException(400,str(e))
+
+@app.post('/api/learning/experiments/{experiment_id}/evaluate')
+def learning_evaluate(experiment_id: str):
+    try: return {'ok':True,**evaluate_experiment(experiment_id)}
+    except ValueError as e: raise HTTPException(400,str(e))
+
+@app.post('/api/learning/experiments/{experiment_id}/promote')
+def learning_promote(experiment_id: str):
+    try: return {'ok':True,'experiment':promote_winner(experiment_id)}
+    except ValueError as e: raise HTTPException(400,str(e))
+
+@app.get('/api/learning/strategies')
+def learning_strategies():
+    return {'strategies':learned_strategies()}
 
 @app.get('/api/campaigns')
 def campaign_list(): return {'campaigns':campaigns()}
@@ -466,7 +549,6 @@ class GrowthDecisionIn(BaseModel):
 
 class CampaignExecuteIn(BaseModel):
     simulate_failure: bool = False
-
 
 @app.post('/api/growth/opportunities/{opportunity_id}/decision')
 def growth_decision(opportunity_id: str, body: GrowthDecisionIn):

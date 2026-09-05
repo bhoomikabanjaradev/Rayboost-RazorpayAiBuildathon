@@ -13,6 +13,7 @@ AGENTS = {
     "Growth Agent": {"actors": ["growth_agent"], "description": "Merchant revenue analysis and opportunities"},
     "Campaign Agent": {"actors": ["campaign_agent"], "description": "Approved campaign planning and test execution"},
     "Checkout Agent": {"actors": ["checkout_agent", "razorpay"], "description": "Purchase confirmation, payment and safe failure handling"},
+    "Learning Agent": {"actors": ["learning_agent"], "description": "Experiment measurement, winner evaluation and reusable decision signals"},
 }
 
 ACTION_WHY = {
@@ -30,6 +31,11 @@ ACTION_WHY = {
     "payment.verify": "The payment result was accepted only after Razorpay signature verification.",
     "payment.failed": "The payment failed safely; the cart remains available for retry.",
     "payment.success": "The test payment completed and the order was recorded as paid.",
+    "learning.experiment.create": "A bounded experiment was created to compare strategies using measured outcomes rather than agent guesses.",
+    "learning.experiment.start": "The merchant started an experiment; this records analytics only and does not spend money.",
+    "learning.exposure": "A buyer or test participant was assigned an experiment variant so its performance can be measured.",
+    "learning.conversion": "A measured conversion outcome was attached to a variant to calculate performance.",
+    "learning.experiment.promote": "The merchant promoted a winner after the minimum evidence threshold was met, making it a future decision signal.",
 }
 
 
@@ -192,7 +198,8 @@ def _feedback_loop(audits, buyer_events, checkouts, campaigns):
         {"stage": "Campaign execution", "count": campaign_runs},
         {"stage": "Buyer interaction", "count": sum(1 for e in buyer_events if e.get("event_type") in ("recommendation_view", "cart_add"))},
         {"stage": "AI-assisted purchase", "count": paid},
-        {"stage": "Performance data", "count": len(campaigns) + len(checkouts)},
+        {"stage": "Experimentation", "count": sum(1 for a in audits if a.get("action") in ("learning.experiment.create", "learning.experiment.start"))},
+        {"stage": "Performance data", "count": len(campaigns) + len(checkouts) + sum(1 for a in audits if a.get("action") in ("learning.exposure", "learning.conversion"))},
     ]
 
 
