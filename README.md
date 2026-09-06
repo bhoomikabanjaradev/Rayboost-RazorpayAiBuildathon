@@ -19,7 +19,11 @@
 - **Make the merchant AI-sellable** — an agent-readable commerce gateway (via MCP) lets external AI agents browse, cart, and check out through Razorpay.
 
 ##  📈 What RAYBOOST Does 
+RAYBOOST solves the gap between AI-driven product discovery and real, safe commerce. It enables merchants to become AI-sellable by allowing external AI agents to discover their catalogue, understand products, personalize recommendations, build carts, and initiate purchases through an agent-ready commerce gateway. At the same time, its merchant-side AI agents identify revenue opportunities, create and evaluate campaigns, and learn from actual outcomes to improve future growth decisions.
 
+Unlike an AI agent with unrestricted payment access, RAYBOOST separates AI decision-making from financial execution: prices and policies are validated server-side, purchases require explicit buyer confirmation, payments run through Razorpay Test Mode, and every critical action is auditable with graceful failure handling.
+
+In short: RAYBOOST helps merchants sell to both humans and AI buyers while making agentic commerce measurable, controlled, and trustworthy.
 ###  Merchant Growth 
 
 ```text
