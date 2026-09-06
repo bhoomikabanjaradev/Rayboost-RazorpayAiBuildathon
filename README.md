@@ -8,7 +8,7 @@
 </div>
 
 * Watch the Video Demo:  [Video](https://drive.google.com/file/d/12V8O-leI4xS5Eyc-1e6IUx28x-HaZ0Mo/view?usp=drive_link) 
-* Step-by-Step Evolution: Explore the [Stage-by-Stage Codebase Here]() to see how the project was built from the ground up.
+* Step-by-Step Evolution: Explore the [Stage-by-Stage Codebase Here](https://github.com/bhoomikabanjaradev/rayboost-from-scratch) to see how the project was built from the ground up.
 
 ---
 ##  📉 Business Problem
