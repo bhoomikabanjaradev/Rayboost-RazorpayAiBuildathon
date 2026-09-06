@@ -2,97 +2,25 @@
 
 #  RAYBOOST AI 
 
-**The platform connects AI-driven product discovery, personalization, merchant growth, campaign execution, purchase intelligence and Razorpay-powered test checkout into one controlled commerce loop.**
+**An AI-native commerce layer that lets AI agents discover, recommend, and buy from a merchant — while every money action stays bounded, explainable, and human-gated.**
 
 *<i>Built For Razorpay AI Buildathon 2026 — Track 01<i>*
 </div>
 
----
-
-RAYBOOST tackles both sides of the problem:
-> Grow the merchant's revenue, and make them sellable to AI buyers.
-* **Grow the merchant's revenue** through AI-driven opportunities and campaign orchestration.
-* **Make the merchant sellable to AI buyers** through an agent-readable commerce gateway and MCP integration.
-
-
-The project focuses on two connected capabilities:
-<div align="center">
-    
-### Merchant Growth
-
-```text
-Sales Data
-    ↓
-Growth Agent
-    ↓
-Revenue Opportunity
-    ↓
-Merchant Approval
-    ↓
-Campaign Orchestrator
-    ↓
-Campaign Result
-```
-
-### Agentic Commerce
-
-```text
-External AI Agent
-        ↓
-MCP
-        ↓
-RAYBOOST Commerce Gateway
-        ↓
-Product Discovery
-        ↓
-Cart
-        ↓
-Purchase Intent
-        ↓
-Buyer Confirmation
-        ↓
-Razorpay Test Checkout
-```
----
-</div>
-
-
-## 📉 Business Problem
-
-Traditional merchants are built for human-operated commerce:
-
-```text
-Search → Product Page → Cart → Checkout → Payment
-```
-
-AI agents change this interaction model.
-
-An AI buyer can understand:
-
-> "Find me a laptop suitable for programming under ₹70,000."
-
-But for an AI agent to actually transact, the merchant needs machine-readable capabilities for:
-
-* product discovery
-* product information
-* cart operations
-* purchase intent
-* checkout
-* order status
-
-At the same time, merchants need AI systems that can identify revenue opportunities and execute approved growth strategies.
-
-RAYBOOST connects these two worlds.
+* Watch the Video Demo:  [Video](https://drive.google.com/file/d/12V8O-leI4xS5Eyc-1e6IUx28x-HaZ0Mo/view?usp=drive_link) 
+* Step-by-Step Evolution: Explore the [Stage-by-Stage Codebase Here]() to see how the project was built from the ground up.
 
 ---
+##  📉 Business Problem
 
-#  What RAYBOOST Does 📈
+>Traditional merchants are built for humans: `Search → Product Page → Cart → Checkout → Payment`. An AI agent can understand a request like *"find me a laptop under ₹70,000"*, but it has no machine-readable way to discover products, build a cart, or pay. Merchants also need a way to turn their own sales data into growth opportunities. RAYBOOST solves both:
 
-RAYBOOST has two major sides.
+- **Grow the merchant's revenue** — a growth agent turns sales data into merchant-approved campaigns.
+- **Make the merchant AI-sellable** — an agent-readable commerce gateway (via MCP) lets external AI agents browse, cart, and check out through Razorpay.
 
-## 1. Merchant Growth
+##  📈 What RAYBOOST Does 
 
-The merchant side continuously turns transaction data into actionable growth opportunities.
+###  Merchant Growth 
 
 ```text
 Merchant Sales
@@ -109,11 +37,7 @@ Performance
       ↓
 Learning
 ```
-
-## 2. AI-Native Commerce
-
-The commerce side allows an external AI agent to interact with the merchant.
-
+### Agentic Commerce
 ```text
 Claude
   ↓
@@ -125,10 +49,9 @@ Catalogue / Cart / Purchase
   ↓
 Razorpay Checkout
 ```
-We built an AI-native commerce layer that makes a merchant discoverable and transactable by external AI agents, while simultaneously using AI to grow the merchant's revenue — with deterministic financial guardrails around every money action.
----
 
-# 🏗️ System Architecture
+---
+## 1.System Architecture
 
 ```mermaid
 flowchart TB
@@ -184,262 +107,108 @@ flowchart TB
 
     CTRL -. observes .-> AUDIT
 ```
+RAYBOOST separates **AI reasoning** from **financial execution**. An agent can propose a product, a cart, or a campaign — it can never move money. Every purchase passes through a deterministic policy engine before it reaches Razorpay.
+
+| Component | Role | Money Execution |
+|---|---|---|
+| External AI / Claude | Intent understanding | No |
+| AI Buyer | Discovery & recommendation | No |
+| Growth Agent | Revenue analysis | No |
+| Campaign Agent | Approved campaign execution | Bounded |
+| Commerce Gateway | AI-facing commerce interface | No |
+| Purchase Intent | Purchase preparation | No |
+| Policy Engine | Deterministic validation | No |
+| Buyer Confirmation | Authorization gate | Required |
+| Razorpay Checkout | Payment execution | Yes |
+| Audit Trail | Immutable activity record | No |
 
 ---
+RAYBOOST separates **AI reasoning** from **financial execution**. An agent can propose a product, a cart, or a campaign — it can never move money. Every purchase passes through a deterministic policy engine before it reaches Razorpay.
 
-# 🔐 Safety Architecture
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left" width="25%">Component</th>
+      <th align="left" width="55%">Role</th>
+      <th align="left" width="20%">Money Execution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>External AI / Claude</strong></td>
+      <td>Intent understanding</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>AI Buyer</strong></td>
+      <td>Discovery &amp; recommendation</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Growth Agent</strong></td>
+      <td>Revenue analysis</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Campaign Agent</strong></td>
+      <td>Approved campaign execution</td>
+      <td>Bounded</td>
+    </tr>
+    <tr>
+      <td><strong>Commerce Gateway</strong></td>
+      <td>AI-facing commerce interface</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Purchase Intent</strong></td>
+      <td>Purchase preparation</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Policy Engine</strong></td>
+      <td>Deterministic validation</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Buyer Confirmation</strong></td>
+      <td>Authorization gate</td>
+      <td>Required</td>
+    </tr>
+    <tr>
+      <td><strong>Razorpay Checkout</strong></td>
+      <td>Payment execution</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Audit Trail</strong></td>
+      <td>Immutable activity record</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+---
+## 2.Agents
 
-RAYBOOST does not give an LLM unrestricted authority over money movement.
-
-The architecture separates **AI reasoning** from **financial execution**.
-
-```text
-AI Agent
-   │
-   │ proposes / requests
-   ▼
-Commerce Gateway
-   │
-   ▼
-Policy Engine
-   │
-   ├── Max discount: 10%
-   ├── Max automatic order: ₹1,00,000
-   ├── Purchase confirmation required
-   ├── Campaign approval required
-   └── Payment verification required
-   │
-   ▼
-Razorpay Test Checkout
-```
-
-### Trust Boundary
-
-| Component            | Role                         | Money Execution |
-| -------------------- | ---------------------------- | --------------- |
-| External AI / Claude | Intent understanding         | ❌               |
-| AI Buyer             | Discovery & recommendation   | ❌               |
-| Growth Agent         | Revenue analysis             | ❌               |
-| Campaign Agent       | Approved campaign execution  | Bounded         |
-| Commerce Gateway     | AI-facing commerce interface | ❌               |
-| Purchase Intent      | Purchase preparation         | ❌               |
-| Policy Engine        | Deterministic validation     | ❌               |
-| Buyer Confirmation   | Authorization gate           | Required        |
-| Razorpay Checkout    | Payment execution            | ✅               |
-| Audit Trail          | Immutable activity record    | ❌               |
-| Control Center       | Monitoring                   | ❌               |
-| Learning Agent       | Outcome analysis             | ❌               |
+- **AI Buyer** — turns a natural-language request into catalogue search, product inspection, and a recommendation, using tools rather than model memory.
+- **Merchant Growth Agent** — finds cross-sell, attach, and revenue-uplift opportunities and proposes them; it never spends merchant money directly.
+- **Campaign Orchestrator** — converts a merchant-approved opportunity into a bounded, guardrail-checked campaign.
+- **Buyer Intelligence** — learns from searches, views, cart activity, and purchases to improve future recommendations.
+- **Checkout Agent** — drives cart → purchase review → buyer confirmation → policy check → Razorpay checkout → verification.
+- **Agent Control Center** — a single view of agent activity, guardrails, campaign performance, and the decision timeline.
+- **Agent Commerce Gateway** — the machine-readable surface (search, details, related products, cart, purchase intent, checkout, order status) that external agents call.
+- **Learning & Experimentation** — closes the loop from decision to outcome to a learned strategy for the next decision.
 
 ---
+## 3. Claude + MCP
 
-# 🤖 Agent System
+Claude talks to RAYBOOST through an MCP adapter, which forwards calls to the Agent Commerce Gateway (`search_products`, `get_product`, `create_cart`, `add_to_cart`, `create_purchase_intent`, `confirm_purchase`, `prepare_checkout`). Every checkout still passes through the policy gate and requires explicit buyer confirmation before Razorpay is called.
 
-## AI Buyer
+## 4. Razorpay Integration
 
-Understands natural-language shopping requests and uses catalogue tools instead of relying only on LLM memory.
-
-```text
-User Request
-    ↓
-Search Catalogue
-    ↓
-Inspect Products
-    ↓
-Related Products
-    ↓
-Personalized Recommendation
-```
-
-## Merchant Growth Agent
-
-Analyzes merchant sales data to identify opportunities such as:
-
-* cross-sell opportunities
-* product attachment opportunities
-* revenue uplift opportunities
-
-It proposes actions rather than directly spending merchant money.
-
-## Campaign Orchestrator
-
-Converts approved opportunities into bounded campaigns.
-
-```text
-Opportunity
-     ↓
-Merchant Approval
-     ↓
-Campaign Draft
-     ↓
-Guardrail Check
-     ↓
-Explicit Execute
-     ↓
-Campaign Result
-```
-
-## Buyer Intelligence
-
-Uses first-party commerce activity such as:
-
-* searches
-* product views
-* cart additions
-* purchases
-* preferred categories
-* product relationships
-
-to improve future recommendations.
-
-## Checkout Agent
-
-Controls the purchase lifecycle:
-
-```text
-Cart
- ↓
-Purchase Review
- ↓
-Buyer Confirmation
- ↓
-Fingerprint Validation
- ↓
-Policy Validation
- ↓
-Razorpay Checkout
- ↓
-Payment Verification
-```
-
-## Agent Control Center
-
-Provides a unified view of:
-
-* agent activity
-* revenue intelligence
-* guardrails
-* campaign performance
-* decision timeline
-* feedback loops
-
-## Agent Commerce Gateway
-
-Makes the merchant machine-readable for external AI agents.
-
-Capabilities include:
-
-```text
-Product Search
-Product Details
-Related Products
-Recommendations
-Cart
-Purchase Intent
-Purchase Confirmation
-Checkout
-Order Status
-```
-
-## Learning & Experimentation
-
-Closes the feedback loop:
-
-```text
-Decision
-   ↓
-Experiment
-   ↓
-Execution
-   ↓
-Conversion
-   ↓
-Revenue Impact
-   ↓
-Learned Strategy
-   ↓
-Future Decision
-```
+Runs on Razorpay Test Mode: server-side amount calculation, bounded discounts, order limits, order creation, checkout, signature verification, retry on failure, and an audit event per step. No production money moves in this demo.
 
 ---
-
-# 🔌 Claude + MCP
-
-RAYBOOST exposes its commerce capabilities through an MCP adapter so external AI agents can interact with the merchant.
-
-```text
-Claude
-  │
-  │ MCP
-  ▼
-RAYBOOST MCP Adapter
-  │
-  │ REST / JSON
-  ▼
-U8 Agent Commerce Gateway
-  │
-  ├── Catalogue
-  ├── Cart
-  ├── Purchase Intent
-  └── Checkout
-```
-
-Example interaction:
-
-```text
-User:
-"Find me a programming laptop under ₹70,000."
-
-Claude
-   ↓
-search_products()
-   ↓
-get_product()
-   ↓
-recommend
-   ↓
-create_cart()
-   ↓
-add_to_cart()
-```
-
-Before payment:
-
-```text
-create_purchase_intent()
-        ↓
-review purchase
-        ↓
-explicit buyer confirmation
-        ↓
-prepare_checkout()
-        ↓
-Razorpay Test Checkout
-```
-
----
-
-# 💳 Razorpay Integration
-
-RAYBOOST uses Razorpay Test Mode for the payment execution layer.
-
-The payment flow includes:
-
-* server-side amount calculation
-* bounded discounts
-* maximum order limits
-* internal order IDs
-* Razorpay order creation
-* checkout
-* signature verification
-* success/failure handling
-* retry support
-* audit events
-
-No production money is moved by the demo environment.
-
----
-
-# 🛡️ Guardrails
+## 5. 🛡️ Guardrails
 
 RAYBOOST enforces explicit constraints.
 
@@ -460,7 +229,7 @@ The goal is simple:
 
 ---
 
-# 🔄 End-to-End Commerce Flow
+## 6.  End-to-End Commerce Flow
 
 ```mermaid
 sequenceDiagram
@@ -499,9 +268,7 @@ sequenceDiagram
     R-->>C: Test checkout
 ```
 
----
-
-# 📈 Revenue Growth Loop
+## 📈 Revenue Growth Loop
 
 ```mermaid
 flowchart LR
@@ -525,344 +292,114 @@ flowchart LR
 
 ---
 
-# 🧩 Tech Stack
+## 7.Tech Stack
 
-### Frontend
-
-* React
-* Vite
-* CSS
-
-### Backend
-
-* Python
-* FastAPI
-* Pydantic
-
-### AI
-
-* Google Gemini
-* AI Buyer
-* Merchant Growth Agent
-* Checkout Agent
-* Learning Agent
-
-### Agentic Interface
-
-* Model Context Protocol (MCP)
-* Claude Desktop
-* RAYBOOST MCP Adapter
-
-### Payments
-
-* Razorpay Test Mode
-* Razorpay Checkout
-* Payment signature verification
-
-### Data
-
-* SQLite
-* Audit event ledger
-
-### Development
-
-* Git
-* GitHub
-* Python virtual environment
-* npm
+- **Frontend:** React, Vite
+- **Backend:** Python, FastAPI, Pydantic
+- **AI:** Google Gemini — AI Buyer, Growth Agent, Checkout Agent, Learning Agent
+- **Agentic interface:** Model Context Protocol (MCP), Claude Desktop, RAYBOOST MCP Adapter
+- **Payments:** Razorpay Test Mode, signature verification
+- **Data:** SQLite, audit event ledger
 
 ---
+## 8. Local Setup & Quickstart Guide
 
-# 🚀 Local Setup
+### Prerequisites
 
-## Backend
+* **Python 3.10+**
+* **Node.js 18+ & npm**
+
+### 1. Backend Setup & Launch
 
 ```bash
+## Backend Setup & Launch
+
+```bash
+# Navigate to backend directory
 cd backend
 
+# Create virtual environment
 python -m venv .venv
 
-# Windows
+# Activate virtual environment (Windows)
 .venv\Scripts\activate
 
+# Install Python dependencies
 pip install -r requirements.txt
 
+# Start FastAPI server with live reload
 uvicorn app.main:app --reload --port 8000
 ```
+Open `http://localhost:5173`
 
-## Frontend
+### 2. Frontend Setup & Launch
 
 ```bash
+# Navigate to frontend directory (in a new terminal window)
 cd frontend
 
+# Install npm packages
 npm install
 
+# Launch Vite development server
 npm run dev
 ```
+- Open `http://localhost:5173`
 
-Open:
+- Interactive API doc (Swagger UI) available at `http://127.0.0.1:8000/docs`
 
-```text
-http://localhost:5173
-```
-
----
-
-# 🤖 Claude / MCP Setup
-
-Start RAYBOOST:
-
-```bash
-uvicorn app.main:app --reload --port 8000
-```
-
-Install MCP dependencies:
-
+### Claude / MCP
 ```bash
 pip install -r mcp_adapter/requirements-mcp.txt
 ```
-
-Configure Claude Desktop to launch:
-
-```text
-mcp_adapter/server.py
-```
-
-The MCP adapter connects Claude to:
-
-```text
-Claude
- ↓
-MCP
- ↓
-RAYBOOST U8
- ↓
-Commerce APIs
-```
-
-See:
-
-```text
-docs/claude-mcp.md
-```
-
-for the complete setup.
+Point Claude Desktop's MCP config at `mcp_adapter/server.py` — full steps in `docs/claude-mcp.md`.
 
 ---
 
-# 🧪 Demo Scenario
+## 9. Demo Scenario
 
-### Merchant
+Merchant: RAYBOOST Demo Store. AI Buyer: Claude. Request: *"Find me a programming laptop under ₹70,000."*
 
-RAYBOOST Demo Store
+Flow: discover merchant → search catalogue → inspect products → recommend → create cart → create purchase intent → buyer confirmation → Razorpay test checkout → payment verification → audit trail.
 
-### AI Buyer
+### Failure Handling
 
-Claude
-
-### Example request
-
-```text
-Find me a programming laptop under ₹70,000.
-```
-
-### Agent flow
-
-```text
-Discover merchant
-       ↓
-Search catalogue
-       ↓
-Inspect products
-       ↓
-Recommend
-       ↓
-Create cart
-       ↓
-Create purchase intent
-       ↓
-Buyer confirmation
-       ↓
-Razorpay Test Checkout
-       ↓
-Payment verification
-       ↓
-Audit Trail
-```
+- **Payment fails** → cart is preserved, purchase marked `FAILED`, retry available.
+- **Cart changes after review** → fingerprint mismatch blocks checkout until the buyer re-reviews.
+- **Campaign fails** → marked `FAILED`, retry supported, audit event recorded.
 
 ---
 
-# 💥 Failure Handling
+## 10. Buildathon Alignment
 
-RAYBOOST deliberately demonstrates graceful failure.
+| Track 01 Requirement | RAYBOOST |
+|---|---|
+| Grow merchant revenue | Growth Agent + Campaigns |
+| AI-readable merchant | Commerce Gateway |
+| AI buyer | AI Buyer + Claude |
+| End-to-end commerce | Cart → Intent → Checkout |
+| Explainable money actions | Purchase summary + audit |
+| Bounded actions | Policy limits |
+| Gated actions | Buyer confirmation |
+| Audit trail | Agent activity ledger |
+| Graceful failure | Payment/campaign retry flows |
 
-### Payment failure
+## 11. Roadmap
 
-```text
-Payment Failed
-     ↓
-Cart Preserved
-     ↓
-Purchase State = FAILED
-     ↓
-Retry Available
-```
+AI Buyer · Tool-driven catalogue · Bounded Razorpay checkout · Growth Agent · Campaign Orchestrator · Buyer Intelligence · Checkout Agent · Agent Control Center · Agent Commerce Gateway · Claude + MCP integration · Learning & Experimentation — all shipped.
 
-### Cart changed after review
+## Security Notes
 
-```text
-Purchase Intent
-       ↓
-Cart fingerprint mismatch
-       ↓
-Checkout blocked
-       ↓
-User reviews updated cart
-```
-
-### Campaign failure
-
-```text
-Campaign Execution
-       ↓
-Failure
-       ↓
-FAILED state
-       ↓
-Retry
-       ↓
-Audit event
-```
+Runs on Razorpay Test Mode only. Never commit `.env`, API keys, Razorpay secrets, Gemini keys, or local databases — use `.env.example` as the template.
 
 ---
-
-# 📊 What Makes RAYBOOST Agentic?
-
-RAYBOOST is not simply an LLM chatbot.
-
-The system combines:
-
-```text
-Perception
-    ↓
-Reasoning
-    ↓
-Tool Use
-    ↓
-State
-    ↓
-Policy
-    ↓
-Action
-    ↓
-Observation
-    ↓
-Learning
-```
-
-The agents interact with real application state through tools and APIs, while deterministic controls remain responsible for financial authorization.
-
----
-
-# 🗺️ Roadmap
-
-* [x] AI Buyer
-* [x] Tool-driven Catalogue
-* [x] Bounded Razorpay Checkout
-* [x] Merchant Growth Agent
-* [x] Campaign Orchestrator
-* [x] Buyer Intelligence
-* [x] AI Buyer Checkout Agent
-* [x] Agent Control Center
-* [x] Agent Commerce Gateway
-* [x] Claude + MCP Integration
-* [x] Learning & Experimentation Engine
-
----
-
-# 🏆 Buildathon Alignment
-
-| Track 01 Requirement      | RAYBOOST                     |
-| ------------------------- | ---------------------------- |
-| Grow merchant revenue     | Growth Agent + Campaigns     |
-| AI-readable merchant      | Commerce Gateway             |
-| AI buyer                  | AI Buyer + Claude            |
-| End-to-end commerce       | Cart → Intent → Checkout     |
-| Explainable money actions | Purchase summary + audit     |
-| Bounded actions           | Policy limits                |
-| Gated actions             | Buyer confirmation           |
-| Audit trail               | Agent activity ledger        |
-| Graceful failure          | Payment/campaign retry flows |
-
----
-
-# 📸 Product Screenshots
-
-Add screenshots here:
-
-* AI Buyer
-* Growth Agent
-* Campaign Orchestrator
-* Buyer Intelligence
-* Agent Control Center
-* Agent Commerce Gateway
-* Claude + MCP
-* Razorpay Test Checkout
-
----
-
-# 🎥 Demo
-
-**5-minute demo:**
-`[Add video link]`
-
-The demo covers:
-
-1. Merchant revenue opportunity
-2. Campaign approval
-3. External AI agent discovering the merchant
-4. Product recommendation
-5. Cart creation
-6. Purchase confirmation gate
-7. Razorpay Test Checkout
-8. Audit trail
-9. Agent Control Center
-
----
-
-# 📚 Documentation
-
-* [Architecture](docs/architecture.md)
-* [Agent Flow](docs/agent-flow.md)
-* [Security & Guardrails](docs/security.md)
-* [API Reference](docs/api.md)
-* [Demo Script](docs/demo-script.md)
-
----
-
-# ⚠️ Demo / Security Notes
-
-This repository is configured for demonstration using Razorpay Test Mode.
-
-Never commit:
-
-```text
-.env
-API keys
-Razorpay secrets
-Gemini API keys
-private credentials
-local databases
-```
-
-Use `.env.example` as the configuration template.
-
----
-
-# 👩‍💻 Built for Razorpay AI Buildathon 2026
+Built for Razorpay AI Buildathon 2026
 
 **Track:** AI Growth & Agentic Commerce
 
 **Core idea:** Make merchants discoverable, transactable and optimizable by AI agents — without giving AI unrestricted financial authority.
 
 ---
+
+
+
