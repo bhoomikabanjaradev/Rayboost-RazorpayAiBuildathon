@@ -1,6 +1,6 @@
 <div align="center">
 
-#  RAYBOOST AI 
+# 🛍️ RAYBOOST AI 
 
 **An AI-native commerce layer that lets AI agents discover, recommend, and buy from a merchant — while every money action stays bounded, explainable, and human-gated.**
 
@@ -122,70 +122,6 @@ RAYBOOST separates **AI reasoning** from **financial execution**. An agent can p
 | Razorpay Checkout | Payment execution | Yes |
 | Audit Trail | Immutable activity record | No |
 
----
-RAYBOOST separates **AI reasoning** from **financial execution**. An agent can propose a product, a cart, or a campaign — it can never move money. Every purchase passes through a deterministic policy engine before it reaches Razorpay.
-
-<table width="100%">
-  <thead>
-    <tr>
-      <th align="left" width="25%">Component</th>
-      <th align="left" width="55%">Role</th>
-      <th align="left" width="20%">Money Execution</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>External AI / Claude</strong></td>
-      <td>Intent understanding</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>AI Buyer</strong></td>
-      <td>Discovery &amp; recommendation</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Growth Agent</strong></td>
-      <td>Revenue analysis</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Campaign Agent</strong></td>
-      <td>Approved campaign execution</td>
-      <td>Bounded</td>
-    </tr>
-    <tr>
-      <td><strong>Commerce Gateway</strong></td>
-      <td>AI-facing commerce interface</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Purchase Intent</strong></td>
-      <td>Purchase preparation</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Policy Engine</strong></td>
-      <td>Deterministic validation</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Buyer Confirmation</strong></td>
-      <td>Authorization gate</td>
-      <td>Required</td>
-    </tr>
-    <tr>
-      <td><strong>Razorpay Checkout</strong></td>
-      <td>Payment execution</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Audit Trail</strong></td>
-      <td>Immutable activity record</td>
-      <td>No</td>
-    </tr>
-  </tbody>
-</table>
 ---
 ## 2.Agents
 
